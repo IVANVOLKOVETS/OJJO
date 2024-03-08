@@ -1,19 +1,25 @@
 <template>
-    <h1>OJJO JEWELRY</h1>
+  <CatalogView />
 </template>
 
 <script>
-
-import { defineComponent } from 'vue'; 
+import { defineComponent } from "vue";
+import CatalogView from "./views/CatalogView.vue";
 
 export default defineComponent({
-    name: 'App'
-});
+  name: "App",
+  components: {
+    CatalogView,
+  },
 
+  setup() {
+    return {};
+  },
+});
 </script>
 
 <style lang="scss">
 h1 {
-    color: aqua;
+  color: aqua;
 }
 </style>
