@@ -4,6 +4,7 @@
     tabindex="0"
     @blur="closeSelect"
     @click="toggleDropdown"
+    @keydown.space.prevent="toggleDropdown"
     :class="selectClass"
   >
     <p :title="selectedOption" class="select__value text-16-400">
@@ -12,12 +13,16 @@
 
     <BaseIcon icon="triangle" class="select__icon" />
 
-    <div v-if="isDropdownOpen" class="select__options">
+    <div v-show="isDropdownOpen" class="select__options">
       <p
-        v-for="option in newOptions"
+        v-for="(option, index) in newOptions"
         :key="option.value"
+        :value="option.value"
         :title="option.text"
+        tabindex="0"
+        :ref="(el) => (optionsRef[index] = el)"
         @click.stop="selectOption(option.value)"
+        @blur="closeSelect"
         class="select__option text-16-400"
       >
         {{ option.text }}
@@ -45,8 +50,11 @@ export default {
   },
   setup(props, { emit }) {
     const select = ref(null);
+    const optionsRef = ref({});
+    const focusedOption = ref(0);
     const isDropdownOpen = ref(false);
     const selectedOption = ref("Select an option option option option");
+
     const newOptions = computed(() => props.options);
     const selectClass = computed(() => {
       return {
@@ -55,25 +63,35 @@ export default {
       };
     });
 
-    const toggleDropdown = () => {
+    const toggleDropdown = (event) => {
+      if (event && event.target.classList.contains("select__option")) {
+        selectOption(event.target.attributes.value.value, true)
+        select.value.focus()
+        return
+      }
       isDropdownOpen.value = !isDropdownOpen.value;
     };
 
     const selectOption = (value) => {
       selectedOption.value = value;
       emit("select", value);
-
-      if (select.value) {
-        select.value.blur();
-      }
+      console.log('hoba')
+      
+      closeSelect();
     };
 
-    const closeSelect = () => {
-      isDropdownOpen.value = false;
+    const closeSelect = (event) => {
+      if (event && event.relatedTarget?.classList.contains("select__option")) {
+        return;
+      } else {
+        isDropdownOpen.value = false;
+      }
     };
 
     return {
       select,
+      optionsRef,
+      focusedOption,
       isDropdownOpen,
       selectedOption,
       newOptions,
@@ -113,6 +131,7 @@ export default {
     overflow-x: hidden;
     text-overflow: ellipsis;
     color: $primary;
+    user-select: none;
 
     &:hover {
       opacity: 0.7;
@@ -139,6 +158,7 @@ export default {
     background-color: $bg;
     border: 1px solid $border;
     border-top: none;
+    z-index: 2;
   }
 
   &__option {
@@ -156,12 +176,20 @@ export default {
     &:active {
       opacity: 0.3;
     }
+
+    &:focus-visible {
+      box-shadow: inset 0 0 0 3px $primary;
+    }
   }
 
   &_opened {
     .select__icon {
       transform: rotate(180deg);
     }
+  }
+
+  &:focus-visible {
+    box-shadow: inset 0 0 0 3px $primary;
   }
 }
 </style>

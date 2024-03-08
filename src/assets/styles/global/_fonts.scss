@@ -40,6 +40,10 @@
     @include text-21-400();
   }
 
+  .text-14-500{
+    @include text-14-500();
+  }
+
   .text-nav {
     @include text-nav();
   }
