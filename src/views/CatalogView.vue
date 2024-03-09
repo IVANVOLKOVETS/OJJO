@@ -1,6 +1,7 @@
 <template>
   <div id="catalog" class="catalog">
     <BaseHeader />
+    <BaseFooter/>
   </div>
 
   <!-- <BaseSelect :options="selectOptions"/>
@@ -20,6 +21,7 @@ import BaseSelect from "../components/inputs/BaseSelect.vue";
 import BaseButton from "../components/buttons/BaseButton.vue";
 import BaseInput from "../components/inputs/BaseInput.vue";
 import BaseHeader from "../layout/BaseHeader.vue";
+import BaseFooter from "../layout/BaseFooter.vue";
 
 export default defineComponent({
   name: "Catalog",
@@ -28,6 +30,7 @@ export default defineComponent({
     BaseButton,
     BaseInput,
     BaseHeader,
+    BaseFooter,
   },
 
   setup() {
