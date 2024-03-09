@@ -7,7 +7,8 @@
     @blur="onBlur"
   >
     <div class="button__content">
-      <span :class="buttonTextClass">
+      <BaseIcon v-if="props.icon" :icon="props.icon" class="button__icon" />
+      <span v-if="isTextVisible" :class="buttonTextClass">
         <slot />
       </span>
     </div>
@@ -15,10 +16,18 @@
 </template>
 
 <script>
-import { defineComponent, computed, ref } from "vue";
+import { defineComponent, computed, ref, useSlots } from "vue";
+import BaseIcon from "../icons/BaseIcon.vue";
 
 export default defineComponent({
+  components: {
+    BaseIcon,
+  },
   props: {
+    icon: {
+      type: Boolean,
+      default: "",
+    },
     outlined: {
       type: Boolean,
       default: false,
@@ -31,9 +40,16 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    text: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   setup(props) {
+    const slots = useSlots();
+
+    const isTextVisible = computed(() => slots.default)
     const isFocus = ref(false);
 
     const buttonClass = computed(() => ({
@@ -41,13 +57,15 @@ export default defineComponent({
       button_small: props.small,
       button_large: props.large,
       button_style_outlined: props.outlined,
+      button_style_text: props.text,
     }));
 
     const buttonTextClass = computed(() => ({
       button__text: true,
+      "text-18-400": !props.small && !props.large && !props.text,
       "text-14-500": props.small,
-      "text-18-400": !props.small && !props.large,
       "text-18-500": props.large || props.outlined,
+      "text-14-400": props.text,
     }));
 
     function onFocus() {
@@ -59,8 +77,10 @@ export default defineComponent({
     }
 
     return {
+      props,
       buttonClass,
       buttonTextClass,
+      isTextVisible,
       onFocus,
       onBlur,
     };
@@ -79,9 +99,16 @@ export default defineComponent({
   background-color: $primary;
   cursor: pointer;
 
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+
   &__text {
     color: $bg;
     user-select: none;
+    white-space: nowrap;
   }
 
   &_small {
@@ -117,6 +144,21 @@ export default defineComponent({
 
     &:focus-visible {
       box-shadow: inset 0 0 0 3px $primary;
+    }
+  }
+
+  &_style_text {
+    height: fit-content;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+
+    .button__text {
+      color: $bg;
+    }
+
+    &:focus-visible {
+      box-shadow: inset 0 0 0 1px $border;
     }
   }
 }

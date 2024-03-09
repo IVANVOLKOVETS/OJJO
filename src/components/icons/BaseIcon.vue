@@ -5,9 +5,29 @@
 <script>
 import { defineComponent, computed } from "vue";
 import TriangleIcon from "./simple/TriangleIcon.vue";
+import SearchIcon from "./simple/SearchIcon.vue";
+import HeartIcon from "./simple/HeartIcon.vue";
+import ProfileIcon from "./simple/ProfileIcon.vue";
+import ListMarkerIcon from "./simple/ListMarkerIcon.vue";
+import LogoIcon from "./simple/LogoIcon.vue";
+import YouTubeIcon from "./simple/YouTubeIcon.vue";
+import VkIcon from "./simple/VkIcon.vue";
+import EtsyIconVue from "./simple/EtsyIcon.vue";
+import FacebookIconVue from "./simple/FacebookIcon.vue";
+import TelegramIconVue from "./simple/TelegramIcon.vue";
 
 const SIMPLE_ICONS = {
-  triangle: TriangleIcon
+  etsy: EtsyIconVue,
+  facebook: FacebookIconVue,
+  heart: HeartIcon,
+  logo: LogoIcon,
+  'list-marker': ListMarkerIcon,
+  profile: ProfileIcon,
+  search: SearchIcon,
+  telegram: TelegramIconVue,
+  triangle: TriangleIcon,
+  'you-tube': YouTubeIcon,
+  vk: VkIcon,
 };
 
 export const DEFAULT_ICON_COLOR = "#333333";

@@ -24,6 +24,10 @@
 
   @import "mixins";
 
+  .text-14-400 {
+    @include text-14-400();
+  }
+
   .text-16-400 {
     @include text-16-400();
   }
