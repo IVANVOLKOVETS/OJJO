@@ -139,6 +139,7 @@ export default defineComponent({
   justify-content: center;
   width: 100%;
   position: fixed;
+  top: 0;
   z-index: 21;
   height: $header-h;
   padding: 0 $horizontal-padding;

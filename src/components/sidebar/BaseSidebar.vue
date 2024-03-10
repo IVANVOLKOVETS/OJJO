@@ -64,18 +64,6 @@
           text
         ></BaseButton>
       </div>
-      <!-- <ul class="media">
-        <li>
-          <a
-            href="#"
-            target="_blank"
-            tabindex="0"
-            class="media__link text-21-400"
-          >
-            <BaseIcon icon="you-tube"/>
-          </a>
-        </li>
-      </ul> -->
       <MediaLinksList/>
     </aside>
   </Transition>

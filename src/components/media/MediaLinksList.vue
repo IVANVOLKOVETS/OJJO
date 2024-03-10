@@ -1,7 +1,12 @@
 <template>
   <ul class="media" :class="mediaLinksClass">
     <li v-for="link in MEDIA_LINKS_LIST" :key="link.key">
-      <a :href="link.href" target="_blank" tabindex="0" class="media__link text-21-400">
+      <a
+        :href="link.href"
+        target="_blank"
+        tabindex="0"
+        class="media__link text-21-400"
+      >
         <BaseIcon :icon="link.key" />
       </a>
     </li>
@@ -72,7 +77,8 @@ export default {
   background-color: transparent;
 
   &__link {
-    display: block;
+    display: flex;
+
     svg {
       height: 36px;
       width: 40px;
@@ -96,6 +102,12 @@ export default {
     .media__link {
       svg {
         fill: $primary;
+        width: 26px;
+        height: 26px;
+      }
+
+      &:focus-visible {
+        box-shadow: inset 0 0 0 1px $primary;
       }
     }
   }

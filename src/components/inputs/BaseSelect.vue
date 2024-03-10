@@ -21,7 +21,7 @@
         :title="option.text"
         tabindex="0"
         :ref="(el) => (optionsRef[index] = el)"
-        @click.stop="selectOption(option.value)"
+        @click.stop="selectOption(option.text, option.value)"
         @blur="closeSelect"
         class="select__option text-16-400"
       >
@@ -47,13 +47,17 @@ export default {
       required: true,
       validator: SelectOptionsValidator,
     },
+    placeholder: {
+      type: String,
+      default: 'Select'
+    }
   },
   setup(props, { emit }) {
     const select = ref(null);
     const optionsRef = ref({});
     const focusedOption = ref(0);
     const isDropdownOpen = ref(false);
-    const selectedOption = ref("Select an option option option option");
+    const selectedOption = ref(props.placeholder);
 
     const newOptions = computed(() => props.options);
     const selectClass = computed(() => {
@@ -65,15 +69,17 @@ export default {
 
     const toggleDropdown = (event) => {
       if (event && event.target.classList.contains("select__option")) {
-        selectOption(event.target.attributes.value.value, true)
+        const text = event.target.attributes.title.value;
+        const value = event.target.attributes.value.value
+        selectOption(text, value)
         select.value.focus()
         return
       }
       isDropdownOpen.value = !isDropdownOpen.value;
     };
 
-    const selectOption = (value) => {
-      selectedOption.value = value;
+    const selectOption = (text, value) => {
+      selectedOption.value = text;
       emit("select", value);
       console.log('hoba')
       

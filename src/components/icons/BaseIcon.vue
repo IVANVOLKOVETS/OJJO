@@ -15,18 +15,34 @@ import VkIcon from "./simple/VkIcon.vue";
 import EtsyIconVue from "./simple/EtsyIcon.vue";
 import FacebookIconVue from "./simple/FacebookIcon.vue";
 import TelegramIconVue from "./simple/TelegramIcon.vue";
+import EmailIcon from "./simple/EmailIcon.vue";
+import TelephoneIcon from "./simple/TelephoneIcon.vue";
+import VisaIcon from "./simple/VisaIcon.vue";
+import MasterCardIcon from "./simple/MasterCardIcon.vue";
+import DeliveryIcon from "./simple/DeliveryIcon.vue";
+import EarringsIcon from "./simple/EarringsIcon.vue";
+import HangerIcon from "./simple/HangerIcon.vue";
+import ListIcon from "./simple/ListIcon.vue";
 
 const SIMPLE_ICONS = {
+  delivery: DeliveryIcon,
+  earrings: EarringsIcon,
   etsy: EtsyIconVue,
+  email: EmailIcon,
   facebook: FacebookIconVue,
+  hanger: HangerIcon,
   heart: HeartIcon,
+  list: ListIcon,
   logo: LogoIcon,
   'list-marker': ListMarkerIcon,
+  mastercard: MasterCardIcon,
   profile: ProfileIcon,
   search: SearchIcon,
   telegram: TelegramIconVue,
+  telephone: TelephoneIcon,
   triangle: TriangleIcon,
   'you-tube': YouTubeIcon,
+  visa: VisaIcon,
   vk: VkIcon,
 };
 

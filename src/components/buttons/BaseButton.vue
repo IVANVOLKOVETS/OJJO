@@ -2,7 +2,6 @@
   <button
     class="button"
     :class="buttonClass"
-    :disabled="disabled"
     @focus="onFocus"
     @blur="onBlur"
   >
@@ -25,7 +24,7 @@ export default defineComponent({
   },
   props: {
     icon: {
-      type: Boolean,
+      type: String,
       default: "",
     },
     outlined: {
@@ -134,6 +133,7 @@ export default defineComponent({
 
   &_style_outlined {
     height: 26px;
+    width: fit-content;
     background-color: transparent;
     border-bottom: 1px dashed $primary;
     padding: 0;
