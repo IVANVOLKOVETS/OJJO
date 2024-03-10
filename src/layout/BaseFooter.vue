@@ -155,11 +155,10 @@ export default {
 @import "/src/assets/styles/global/colors";
 
 .footer {
-  margin-top: 200px;
   display: flex;
   justify-content: center;
   background-color: $bg;
-  padding: 60px $horizontal-padding 24px;
+  padding: 40px $horizontal-padding 24px;
   user-select: none;
 
   a {
@@ -255,7 +254,7 @@ export default {
   }
 
   @media screen and (min-width: $desktop) {
-    padding: 0 $desktop-horizontal-padding 24px;
+    padding: 60px $desktop-horizontal-padding 24px;
 
     &__content {
       max-width: $desktop;
