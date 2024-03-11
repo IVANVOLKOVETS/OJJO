@@ -210,7 +210,7 @@ export default defineComponent({
       display: block;
       background-color: $bg;
       position: absolute;
-      width: 100%;
+      width: 60%;
       height: 4px;
       left: 0;
       top: 9px;
