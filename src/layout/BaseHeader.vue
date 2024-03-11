@@ -55,7 +55,7 @@
         id="toggle-sidebar"
         class="header__menu-button"
         :class="showSidebarClass"
-        @click.capture.stop="toggleSidebar"
+        @click.stop="toggleSidebar"
       >
         <span></span>
         <span></span>
@@ -189,7 +189,6 @@ export default defineComponent({
   }
 
   &__menu-button {
-    touch-action: manipulation;
     position: relative;
     display: flex;
     width: 24px;
