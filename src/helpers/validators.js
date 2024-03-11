@@ -1,5 +1,4 @@
 export function SelectOptionsValidator(value) {
-    console.log(value)
     if (!Array.isArray(value)) {
       console.error('Options must be an array');
       return false;

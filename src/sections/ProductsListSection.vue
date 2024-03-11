@@ -138,6 +138,7 @@ export default defineComponent({
     }
 
     function incrementPage() {
+      console.log("increment");
       page.value += 1;
     }
 
@@ -150,7 +151,7 @@ export default defineComponent({
       console.log("Fetching", url);
 
       try {
-        const response = await fetch(url);
+        // const response = await fetch(url);
         //Add error handling
         // if (!response.ok) {
         //   throw new Error(`${response.status} ${response.statusText}`);
@@ -163,7 +164,7 @@ export default defineComponent({
         // throw error;
       } finally {
         // Remove when backend will be ready
-        const fetchedProductsList = getProducts(page);
+        const fetchedProductsList = await getProducts(page);
         state.productsList = state.productsList.concat(fetchedProductsList);
         console.log(state.productsList);
         state.processing = false;
@@ -171,8 +172,10 @@ export default defineComponent({
     }
 
     watch(
-      [() => state.page, () => state.query],
-      (newPageVal) => loadProducts(newPageVal),
+      [() => page.value, () => state.query],
+      async () => {
+        await loadProducts(page.value);
+      },
       { deep: true }
     );
 
@@ -231,7 +234,6 @@ export default defineComponent({
   }
 
   @media screen and (min-width: $desktop) {
-
     &__filters-control {
       display: none;
     }
