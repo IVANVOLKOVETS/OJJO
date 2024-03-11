@@ -51,17 +51,16 @@
         ></BaseButton>
       </div>
 
-      <button
+      <div
+        tabindex="0"
         id="toggle-sidebar"
         class="header__menu-button"
         :class="showSidebarClass"
-        @click.prevent.stop="toggleSidebar"
+        @click.stop="toggleSidebar"
+        @keydown.space.prevent="toggleSidebar"
       >
         <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      </div>
 
       <Teleport v-if="isMounted" to="#catalog">
         <BaseSidebar :show-sidebar="showSidebar" @close="closeSidebar" />
@@ -191,9 +190,9 @@ export default defineComponent({
   &__menu-button {
     position: relative;
     display: flex;
-    width: 24px;
-    height: 32px;
-    background-color: transparent;
+    width: 30px;
+    height: 20px;
+    user-select: none;
 
     &:hover {
       opacity: 0.7;
@@ -207,49 +206,49 @@ export default defineComponent({
       box-shadow: inset 0 0 0 1px $border;
     }
 
-    & > span {
-      position: absolute;
+    span {
       display: block;
-      width: 8px;
-      height: 8px;
-      border-radius: 8px;
       background-color: $bg;
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      left: 0;
+      top: 9px;
       transition: all 0.3s ease 0s;
-      user-select: none;
+      border-radius: 8px;
     }
 
-    span:first-child {
-      top: 0;
+    &:before,
+    &:after {
+      content: "";
+      background-color: $bg;
+      position: absolute;
+      width: 100%;
+      height: 4px;
       left: 0;
-      transform: rotate(45deg);
-      transform-origin: left;
+      transition: all 0.3s ease 0s;
+      border-radius: 8px;
     }
-    span:nth-child(2) {
-      top: 0;
-      right: 0;
-      transform: rotate(-45deg);
-      transform-origin: right;
+    &:before {
+      top: -2px;
     }
-    span:nth-child(3) {
-      bottom: 0;
-      right: 0;
-      transform: rotate(45deg);
-      transform-origin: right;
-    }
-    span:last-child {
-      bottom: 0;
-      left: 0;
-      transform: rotate(-45deg);
-      transform-origin: left;
+    &:after {
+      bottom: -5px;
     }
   }
 
   &__menu-button.opened {
-    height: 28px;
-
     span {
-      width: 100%;
-      height: 4px;
+      transform: scale(0);
+    }
+
+    &:before {
+      transform: rotate(45deg);
+      top: 8px;
+    }
+    &:after {
+      transform: rotate(-45deg);
+      bottom: 8px;
     }
   }
 

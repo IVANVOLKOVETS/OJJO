@@ -64,7 +64,7 @@
           text
         ></BaseButton>
       </div>
-      <MediaLinksList/>
+      <MediaLinksList />
     </aside>
   </Transition>
 </template>
@@ -106,6 +106,9 @@ export default defineComponent({
         !event.relatedTarget.classList.contains("sidebar__link")
       ) {
         emit("close");
+      } else {
+        console.log("focus sidebar");
+        // sidebar.value?.focus()
       }
     }
 
@@ -114,6 +117,8 @@ export default defineComponent({
       (newValue) => {
         console.log("sidebar");
         if (newValue) {
+          console.log("truthy");
+
           console.log(newValue);
           nextTick(() => sidebar.value?.focus());
         }
