@@ -55,7 +55,7 @@
         id="toggle-sidebar"
         class="header__menu-button"
         :class="showSidebarClass"
-        @click.stop="toggleSidebar"
+        @click.prevent.stop="toggleSidebar"
       >
         <span></span>
         <span></span>
